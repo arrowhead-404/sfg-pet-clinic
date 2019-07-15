@@ -36,12 +36,17 @@
 					<goal>install</goal>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.shared</groupId>
+						<artifactId>maven-invoker</artifactId>
+						<version>2.2</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
 	<scm>
-		<url>https://github.com/arrowhead-404/sfg-pet-clinic</url>
-		<connection>scm:git:git://github.com/arrowhead-404/sfg-pet-clinic.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:arrowhead-404/sfg-pet-clinic.git</developerConnection>
 		<tag>petclinic-0.0.1-SNAPSHOT</tag>
 	</scm>
