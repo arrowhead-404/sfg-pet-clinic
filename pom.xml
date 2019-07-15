@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>com.sfg</groupId>
 	<artifactId>petclinic</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>petclinic</name>
 	<description>Demo project for Spring Boot12</description>
 
@@ -22,7 +22,13 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Internal repo</name>
+			<url>file:///home/thara/testesb/in</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
