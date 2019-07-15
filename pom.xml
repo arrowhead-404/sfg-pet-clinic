@@ -40,7 +40,6 @@
 	</build>
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com:arrowhead-404/sfg-pet-clinic.git</developerConnection>
-	  <tag>petclinic-0.0.1</tag>
-  </scm>
+	</scm>
 
 </project>
