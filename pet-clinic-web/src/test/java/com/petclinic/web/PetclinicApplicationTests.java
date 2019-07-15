@@ -1,4 +1,4 @@
-package com.sfg.petclinic;
+package com.petclinic.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
