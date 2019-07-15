@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>com.sfg</groupId>
 	<artifactId>petclinic</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>petclinic</name>
 	<description>Demo project for Spring Boot12</description>
 
@@ -43,7 +43,7 @@
 		<url>https://github.com/arrowhead-404/sfg-pet-clinic</url>
 		<connection>scm:git:git://github.com/arrowhead-404/sfg-pet-clinic.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:arrowhead-404/sfg-pet-clinic.git</developerConnection>
-		<tag>petclinic-0.0.1</tag>
+		<tag>petclinic-0.0.1-SNAPSHOT</tag>
 	</scm>
 
 </project>
