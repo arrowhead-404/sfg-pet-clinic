@@ -11,6 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -20,6 +24,7 @@ import static org.mockito.Mockito.when;
 class OwnerSDJpaServiceTest {
 
     String LAST_NAME="Datta";
+    Long ownerId=99L;
 
     @Mock
     OwnerRepository ownerRepository;
@@ -47,21 +52,52 @@ class OwnerSDJpaServiceTest {
 
     @Test
     void findAll() {
+        Owner temp1=Owner.builder().id(1L).build();
+        Owner temp2=Owner.builder().id(2L).build();
+        Owner temp3=Owner.builder().id(3L).build();
+        HashSet<Owner> owners=new HashSet<>();
+        owners.add(temp1);
+        owners.add(temp2);
+        owners.add(temp3);
+        when(ownerRepository.findAll()).thenReturn(owners);
+        Set<Owner> allOwners=service.findAll();
+        assertNotNull(allOwners);
+        assertEquals(3, allOwners.size());
+        verify(ownerRepository).findAll();
     }
 
     @Test
     void findById() {
+        Owner temp=Owner.builder().id(ownerId).build();
+        when(ownerRepository.findById(any())).thenReturn(Optional.of(temp));
+        Owner owner=service.findById(ownerId);
+        assertNotNull(owner);
+        assertEquals(ownerId,owner.getId());
+        verify(ownerRepository).findById(any());
     }
 
     @Test
     void save() {
+        Owner temp=Owner.builder().id(ownerId).build();
+        when(ownerRepository.save(any())).thenReturn(temp);
+        Owner tobeSaved=Owner.builder().id(ownerId).build();
+        Owner returned=service.save(tobeSaved);
+        assertNotNull(returned);
+        assertEquals(tobeSaved.getId(), returned.getId());
+        assertEquals(tobeSaved.getId(), temp.getId());
     }
 
     @Test
     void delete() {
+        Owner temp=Owner.builder().id(ownerId).build();
+        service.delete(temp);
+        verify(ownerRepository).delete(any());
     }
 
     @Test
     void deleteById() {
+        Owner temp=Owner.builder().id(ownerId).build();
+        service.deleteById(ownerId);
+        verify(ownerRepository).deleteById(any());
     }
 }
