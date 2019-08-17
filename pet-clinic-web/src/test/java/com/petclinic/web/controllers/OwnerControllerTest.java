@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,17 +46,33 @@ class OwnerControllerTest {
         mockMvc= MockMvcBuilders.standaloneSetup(ownerController).build();
     }
 
-    @Test
-    void listOwnersByIndex() throws Exception{
-        when(ownerService.findAll()).thenReturn(owners);
-
-        mockMvc.perform(get("/owners")).andExpect(status().is(200)).andExpect(view().name("owners/index")).andExpect(model().attribute("owners", hasSize(3)));
-    }
 
     @Test
     void findOwners() throws Exception{
-        mockMvc.perform(get("/owners/find")).andExpect(status().isOk()).andExpect(view().name("notimplemented"));
+        mockMvc.perform(get("/owners/find"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/findowners"))
+                .andExpect(model().attributeExists("owner"));
         verifyZeroInteractions(ownerService);
+    }
+
+    @Test
+    void findFormReturnMany() throws Exception{
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(new ArrayList<>(owners));
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownersList"))
+                .andExpect(model().attribute("selections",hasSize(3)));
+    }
+
+    @Test
+    void findFormReturnOne() throws Exception{
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
     }
 
     @Test
