@@ -44,7 +44,10 @@ public class DataLoader implements CommandLineRunner {
 
         Speciality radiology=new Speciality();
         radiology.setDescription("Radiology");
+        Speciality urology=new Speciality();
+        urology.setDescription("Urology");
         radiology=specialityService.save(radiology);
+        urology=specialityService.save(urology);
         Speciality surgery=new Speciality();
         surgery.setDescription("Surgery");
         ;
@@ -94,6 +97,7 @@ public class DataLoader implements CommandLineRunner {
         vet1.setFirstName("saurav");
         vet1.setLastName("sharma");
         vet1.getSpecialities().add(radiology);
+        vet1.getSpecialities().add(urology);
         vetService.save(vet1);
         Vet vet2=new Vet();
         vet2.setFirstName("gautam");
